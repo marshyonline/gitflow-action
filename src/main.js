@@ -166,7 +166,7 @@ async function merge(pull_number) {
         });
     
             
-        if (getRvConfig.required_approving_review_count) == 1 {
+        if (getRvConfig.required_approving_review_count == 1) {
             const event = "APPROVE"
             const reviewAdd = await client.pulls.createReview({
                 owner,
