@@ -164,7 +164,7 @@ async function merge(pull_number) {
        const getRvConfig = await client.repos.getBranchProtection({
           owner,
           repo,
-          base2,
+          branch: base2,
         });
         core.debug(JSON.stringify(getRvConfig.data));
        
