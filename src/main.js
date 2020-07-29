@@ -159,7 +159,8 @@ async function push() {
 
 async function merge(pull_number) {
     try {
-       const base2 = getTarget(head);
+        const head2 = context.ref.substr(11),
+        base2 = getTarget(head2);
        const getRvConfig = await client.repos.getBranchProtection({
           owner,
           repo,
