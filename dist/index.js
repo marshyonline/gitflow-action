@@ -107,8 +107,8 @@ module.exports = eval("require")("encoding");
 /***/ 31:
 /***/ (function(__unusedmodule, __unusedexports, __webpack_require__) {
 
-const core = __webpack_require__(470),
-    github = __webpack_require__(469);
+const { core}  = __webpack_require__(470);
+const { github } = __webpack_require__(469);
 
 const token = core.getInput("github-token", { required: true }),
     releaseBranch = getBranch("release"),
