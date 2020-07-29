@@ -521,10 +521,11 @@ async function push() {
 
 async function merge(pull_number) {
     try {
+       const head2 = context.ref.substr(11);
        const getRvConfig = await client.repos.getPullRequestReviewProtection({
           owner,
           repo,
-          head,
+          head2,
         });
         core.debug(JSON.stringify(getRvConfig.data));
        
