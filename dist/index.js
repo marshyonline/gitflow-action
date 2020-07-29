@@ -273,8 +273,7 @@ async function merge(pull_number) {
           repo,
           head,
         });
-    
-            
+       
         if (getRvConfig.required_approving_review_count == 1) {
             const event = "APPROVE"
             const reviewAdd = await client.pulls.createReview({
@@ -282,7 +281,8 @@ async function merge(pull_number) {
                 repo,
                 pull_number,
                 event
-            })
+            });
+            core.info(`Review Added!`);
         }
 
         const mergeResponse = await client.pulls.merge({
