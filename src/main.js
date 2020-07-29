@@ -159,15 +159,15 @@ async function push() {
 
 async function merge(pull_number) {
     try {
-       const head2 = context.ref.substr(11);
-       const getRvConfig = await client.repos.getPullRequestReviewProtection({
+       const base2 = getTarget(head);
+       const getRvConfig = await client.repos.getBranchProtection({
           owner,
           repo,
-          head2,
+          base2,
         });
         core.debug(JSON.stringify(getRvConfig.data));
        
-        if (getRvConfig.required_approving_review_count == 1) {
+        if (getRvConfig.required_pull_request_reviews == 1) {
             const event = "APPROVE"
             const reviewAdd = await client.pulls.createReview({
                 owner,
