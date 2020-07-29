@@ -159,6 +159,23 @@ async function push() {
 
 async function merge(pull_number) {
     try {
+       const getRvConfig = await client.repo.getPullRequestReviewProtection({
+          owner,
+          repo,
+          head,
+        });
+    
+            
+        if (getRvConfig.required_approving_review_count) == 1 {
+            const event = "APPROVE"
+            const reviewAdd = await client.pulls.createReview({
+                owner,
+                repo,
+                pull_number,
+                event
+            })
+        }
+
         const mergeResponse = await client.pulls.merge({
             owner,
             pull_number,
@@ -169,7 +186,7 @@ async function merge(pull_number) {
     }
     catch (err) {
         if (require_merge) {
-            core.setFailed("Merge failed.");
+              core.setFailed("Merge failed.");
         } else {
             core.info("Merge failed.");
         }
