@@ -521,16 +521,6 @@ async function push() {
 
 async function merge(pull_number) {
     try {
-        const head2 = context.ref.substr(11),
-        base2 = getTarget(head2);
-       const getRvConfig = await client.repos.getBranchProtection({
-          owner,
-          repo,
-          branch: base2,
-        });
-        core.debug(JSON.stringify(getRvConfig.data));
-       
-        if (getRvConfig.data.required_pull_request_reviews == 1) {
             const event = "APPROVE"
             const reviewAdd = await client.pulls.createReview({
                 owner,
@@ -540,7 +530,6 @@ async function merge(pull_number) {
             });
             core.info(`Review Added!`);
             core.debug(JSON.stringify(reviewAdd.data));
-        }
 
         const mergeResponse = await client.pulls.merge({
             owner,
