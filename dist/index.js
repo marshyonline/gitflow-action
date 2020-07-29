@@ -529,7 +529,7 @@ async function merge(pull_number) {
         });
         core.debug(JSON.stringify(getRvConfig.data));
        
-        if (getRvConfig.required_pull_request_reviews == 1) {
+        if (getRvConfig.data.required_pull_request_reviews == 1) {
             const event = "APPROVE"
             const reviewAdd = await client.pulls.createReview({
                 owner,
